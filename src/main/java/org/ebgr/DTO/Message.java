@@ -10,6 +10,7 @@ public record Message(
 ) {
     @Override
     public String toString() {
-        return String.format("Message[sender=%s, content=%s, cookies=%s]", sender, content, cookies);
+        //return String.format("Message[sender=%s, content=%s, cookies=%s]", sender, content, cookies);
+        return String.format("{\"sender\":\"%s\", \"content\":\"%s\", \"cookies\":\"%s\"}", sender, content, cookies);
     }
 }
