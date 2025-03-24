@@ -31,9 +31,9 @@ public class MessageController {
 
     @POST
     public RestResponse<Message> post_message(Message message) {
-        if(message == null)
+        if(message == null || message.content() == null || message.sender() == null)
             return get_message();
-            
+
         MESSAGE = message.content();
         SENDER =  message.sender();
         return get_message();
