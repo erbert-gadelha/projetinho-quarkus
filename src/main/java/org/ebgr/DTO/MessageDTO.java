@@ -3,7 +3,7 @@ package org.ebgr.DTO;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 
 @RegisterForReflection
-public record Message(
+public record MessageDTO(
     String sender,
     String content,
     String cookies

@@ -1,6 +1,6 @@
 package org.ebgr.message;
 
-import org.ebgr.DTO.Message;
+import org.ebgr.DTO.MessageDTO;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.not;
 import org.junit.jupiter.api.MethodOrderer;
@@ -47,7 +47,7 @@ class MessageControllerTest {
     void test_PostMessageSuccesfully() {
         final String CONTENT = "Olá, amigos!! Como vão?";
         final String SENDER = "Alan";
-        final Message MESSAGE = new Message(SENDER, CONTENT, "");
+        final MessageDTO MESSAGE = new MessageDTO(SENDER, CONTENT, "");
 
         given()
             .contentType(MediaType.APPLICATION_JSON)

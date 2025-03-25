@@ -30,12 +30,23 @@
     </dependencyManagement>
 
     <dependencies>
-        <!-- Dependência para Quarkus RESTEasy Reactive JSON-B -->
         <!-- https://mvnrepository.com/artifact/io.quarkus/quarkus-resteasy-reactive-jsonb -->
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-resteasy-reactive-jsonb</artifactId>
             <version>3.15.4</version>
+        </dependency>
+        
+        <!-- Hibernate ORM specific dependencies -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-hibernate-orm-panache</artifactId>
+        </dependency>
+
+        <!-- JDBC driver dependencies -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-jdbc-postgresql</artifactId>
         </dependency>
 
         <dependency>

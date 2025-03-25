@@ -1,6 +1,6 @@
 package org.ebgr;
 
-import org.ebgr.DTO.Message;
+import org.ebgr.DTO.MessageDTO;
 import org.jboss.resteasy.reactive.RestResponse;
 import org.jboss.resteasy.reactive.RestResponse.ResponseBuilder;
 
@@ -20,9 +20,9 @@ public class MessageController {
     private static String MESSAGE = "Hello, World!";
 
     @GET
-    public RestResponse<Message> get_message() {
-        RestResponse<Message> response = ResponseBuilder
-            .ok(new Message(SENDER, MESSAGE, null))
+    public RestResponse<MessageDTO> get_message() {
+        RestResponse<MessageDTO> response = ResponseBuilder
+            .ok(new MessageDTO(SENDER, MESSAGE, null))
             .build();
         System.out.println(response.getEntity().toString());
 
@@ -30,7 +30,7 @@ public class MessageController {
     }
 
     @POST
-    public RestResponse<Message> post_message(Message message) {
+    public RestResponse<MessageDTO> post_message(MessageDTO message) {
         if(message == null || message.content() == null || message.sender() == null)
             return get_message();
 
