@@ -1,13 +1,16 @@
 package org.ebgr;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.ebgr.DTO.UserDTO;
 import org.ebgr.service.UserService;
 import org.jboss.resteasy.reactive.RestCookie;
 import org.jboss.resteasy.reactive.RestResponse;
 import org.jboss.resteasy.reactive.RestResponse.ResponseBuilder;
 
+import io.quarkus.security.identity.SecurityIdentity;
 import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -22,19 +25,39 @@ import jakarta.ws.rs.core.NewCookie;
 public class UserController {
 
     @Inject
+    SecurityIdentity securityIdentity;
+
+    @Inject
     UserService userService;
 
     @GET
-    public RestResponse<String> get_user(@RestCookie String token) {
+    public RestResponse<List<UserDTO>> get_user() {
+
+        List<UserDTO> users = new ArrayList<>();
+        userService.getUsers().stream().forEach(user -> {
+            users.add(
+                new UserDTO(
+                    user.name,
+                    user.login,
+                    user.password
+                ));
+        });
 
         return ResponseBuilder
-                    .ok(String.format("Logged as user (%s).", token))
+                    .ok(users)
+                    .build();
+    }
+
+    @GET
+    @Path("me")
+    public RestResponse<String> get_me(SecurityIdentity identity) {        
+        return ResponseBuilder
+                    .ok(identity.getPrincipal().getName())
                     .build();
     }
 
 
     @POST
-    @Transactional(dontRollbackOn=Exception.class)
     public RestResponse create(UserDTO dto) {
         return userService.saveUser(dto);
     }
